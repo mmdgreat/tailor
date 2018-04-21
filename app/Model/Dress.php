@@ -42,7 +42,7 @@ class Dress extends AppModel {
  * hasMany associations
  *
  * @var array
- */
+
 	public $hasMany = array(
 		'Order' => array(
 			'className' => 'Order',
@@ -58,7 +58,7 @@ class Dress extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-
+ */
 
 /**
  * hasAndBelongsToMany associations
