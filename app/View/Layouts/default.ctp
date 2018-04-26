@@ -80,21 +80,14 @@
     <!-- Styles -->
     <?= $this->Html->css(array
     (
-        "lib/weather-icons.css", "lib/owl.carousel.min.css",
-        "lib/owl.theme.default.min.css", "lib/font-awesome.min.css",
-        "lib/themify-icons.css", "lib/menubar/sidebar.css",
-        "lib/bootstrap.min.css", "lib/helper.css", "style.css"
+        "lib/weather-icons.css", "lib/owl.carousel.min.css","lib/owl.theme.default.min.css", "lib/font-awesome.min.css",
+        "lib/themify-icons.css", "lib/menubar/sidebar.css","lib/bootstrap.min.css", "lib/helper.css", "style.css","token-input",
+        "token-input-facebook.css","jquery-ui.min.css"
     )) ?>
-    <!--link href="assets/css/lib/weather-icons.css" rel="stylesheet" />
-    <link href="assets/css/lib/owl.carousel.min.css" rel="stylesheet" />
-    <link href="assets/css/lib/owl.theme.default.min.css" rel="stylesheet" />
-<link href="assets/css/lib/font-awesome.min.css" rel="stylesheet">
-<link href="assets/css/lib/themify-icons.css" rel="stylesheet">
-<link href="assets/css/lib/menubar/sidebar.css" rel="stylesheet">
-<link href="assets/css/lib/bootstrap.min.css" rel="stylesheet">
-
-<link href="assets/css/lib/helper.css" rel="stylesheet">
-<link href="assets/css/style.css" rel="stylesheet"-->
+    <?php echo $this->Html->script(array(
+        "lib/jquery.min.js", "lib/jquery-ui.min.js","lib/jquery.tokeninput.js", "lib/jquery.nanoscroller.min.js", "lib/menubar/sidebar.js",
+        "lib/bootstrap.min.js", "scripts.js"
+    )) ?>
 </head>
 
 <body>
@@ -131,12 +124,6 @@
         </div>
     </div>
 </div>
-
-<?php echo $this->Html->script(array(
-    "lib/jquery.min.js", "lib/jquery.nanoscroller.min.js", "lib/menubar/sidebar.js",
-    "lib/bootstrap.min.js", "scripts.js"
-)) ?>
-
 </body>
 
 </html>
