@@ -10,7 +10,7 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 		});
 		$("#getCustomer").tokenInput("<?php echo $url; ?>", {
 			method: "POST",
-			minChars: 3,
+			minChars: 1,
 			tokenLimit: 1,
 			onAdd: function (item) {
 				getCustomer(item.id);
@@ -52,7 +52,7 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 				.done(function (data) {
 					$("#mes").html('');
 					var dress = JSON.parse(data);
-					console.log(dress.Mesurement);
+					console.log(dress);
 					var mes = dress.Mesurement;
 					$.each(dress.Mesurement, function (key, value) {
 						var html = '<div class="col-md-3"><div class="form-group row">'
@@ -62,6 +62,10 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 
 						$("#mes").append(html);
 					});
+
+					$('#OrderTotalCost').empty().val(dress.Dress.default_price);
+					var advval = (dress.Dress.default_price/2).toFixed(2);
+					$('#OrderAdvanceAmount').empty().val(advval);
 				});
 		}
 
@@ -261,25 +265,6 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 								class="control-label text-right col-md-3">Tailor</label>
 							<div class="col-md-9">
 								<?php echo $this->Form->control('user_id', ['div' => false, 'label' => false, 'class' => 'form-control']); ?>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6">
-						<div class="form-group row">
-							<label
-								class="control-label text-right col-md-3">Assigned Tailor</label>
-							<div class="col-md-9">
-								<?php echo $this->Form->control('tailor_assigned', ['div' => false, 'label' => false, 'class' => 'form-control datepicker', 'type' => 'text']); ?>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6">
-						<div class="form-group row">
-							<label class="control-label text-right col-md-3">Tailor Price</label>
-							<div class="col-md-9">
-								<?php echo $this->Form->control('tailor_price', ['div' => false, 'label' => false, 'class' => 'form-control']); ?>
 							</div>
 						</div>
 					</div>

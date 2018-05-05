@@ -68,8 +68,9 @@ class OrdersController extends AppController
 			$this->request->data['Order']['delivery_date'] = date('Y-m-d H:i:s', strtotime($this->request->data['Order']['delivery_date']));
 			$this->request->data['Order']['tailor_date'] = date('Y-m-d H:i:s', strtotime($this->request->data['Order']['tailor_date']));
 			$this->request->data['Order']['tailor_assigned'] = date('Y-m-d H:i:s', strtotime($this->request->data['Order']['tailor_assigned']));
+			$this->request->data['Order']['outstanding_amt'] = $this->request->data['Order']['total_cost'] - $this->request->data['Order']['advance_amount'];
 
-            debug($this->request->data);
+            //debug($this->request->data);
 			$this->Order->create();
             if ($this->Order->save($this->request->data)) {
             	debug('in');
@@ -189,12 +190,18 @@ die;
 	public function assign_tailor()
 	{
 		if ($this->request->is(array('post', 'put'))) {
-			debug($this->Order->data);die;
+			$this->request->data['Order']['status'] = 2;
+            if ($this->Order->save($this->request->data)) {
+                $this->Flash->success(__('Tailor has been assigned.'));
+                return $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Flash->error(__('Tailor could not be assigned. Please, try again.'));
+            }
 		}
 		$this->Order->recursive = 0;
 		$this->paginate = [
 			'order' => 'Order.id ASC',
-			'fields' => ['Order.id','Order.dress_id','Order.order_date','Order.delivery_date','Order.advance_amount','Order.total_cost',
+			'fields' => ['Order.id','Order.dress_id','Order.order_date','Order.delivery_date','Order.advance_amount','Order.total_cost','Order.tailor_price',
 				'Customer.id','Customer.name','Dress.id','Dress.type','User.id','User.first_name','Order.status'
 			],
 			'conditions'=>['Order.status'=>1],
@@ -206,5 +213,34 @@ die;
 		$orders = $this->Paginator->paginate();
 		$users = $this->Order->User->find('list',['fields'=>['id','full_name'],'conditions'=>['role'=>2]]);
 		$this->set(compact('orders','status','users'));
+	}
+
+	public function invoice($id = null)
+	{
+		if (!$this->Order->exists($id)) {
+			throw new NotFoundException(__('Invalid order'));
+		}
+		$options = array('conditions' => array('Order.' . $this->Order->primaryKey => $id));
+		$order = $this->Order->find('first', $options);
+		$this->set(compact('order'));
+	}
+
+	public function mark_paid($id=null) {
+		if (!$this->Order->exists($id)) {
+			throw new NotFoundException(__('Invalid order'));
+		}
+
+		$order = [];
+		$order['Order']['id'] = $id;
+		$order['Order']['outstanding_amt'] = 0;
+		$order['Order']['status'] = 4;
+
+		if ($this->Order->save($order)) {
+			$this->Flash->success(__('Tailor has been assigned.'));
+			return $this->redirect($this->referer());
+		} else {
+			$this->Flash->error(__('Tailor could not be assigned. Please, try again.'));
+			return $this->redirect($this->referer());
+		}
 	}
 }

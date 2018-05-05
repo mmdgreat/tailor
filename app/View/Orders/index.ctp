@@ -42,7 +42,7 @@
 									</span>
 								</td>
                                 <td>
-                                    <?php echo $this->Html->link($order['User']['id'], array('controller' => 'users', 'action' => 'view', $order['User']['id'])); ?>
+                                    <?php echo $this->Html->link($order['User']['first_name'], array('controller' => 'users', 'action' => 'view', $order['User']['id'])); ?>
                                 </td>
                                 <td><?php echo h($order['Order']['advance_amount']); ?>&nbsp;</td>
                                 <td><?php echo h($order['Order']['total_cost']); ?>&nbsp;</td>

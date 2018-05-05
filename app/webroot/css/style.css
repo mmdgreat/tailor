@@ -1655,11 +1655,11 @@ footer p {
 }
 
 #invoice-top {
-    min-height: 120px;
+    min-height: 80px;
 }
 
 #invoice-mid {
-    min-height: 120px;
+    min-height: 40px;
 }
 
 #invoice-bot {

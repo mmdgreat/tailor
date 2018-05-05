@@ -52,7 +52,7 @@ class DressesController extends AppController
     public function add()
     {
         if ($this->request->is('post')) {
-            debug($this->request);
+            //debug($this->request->data);die;
             $this->Dress->create();
             if ($this->Dress->save($this->request->data)) {
                 $this->Flash->success(__('The dress has been saved.'));
@@ -61,8 +61,8 @@ class DressesController extends AppController
                 $this->Flash->error(__('The dress could not be saved. Please, try again.'));
             }
         }
-        //$mesurements = $this->Dress->Mesurement->find('list');
-        //$this->set(compact('mesurements'));
+		$mesurements = $this->Dress->Mesurement->find('list',['fields'=>['id','type']]);
+        $this->set(compact('mesurements'));
     }
 
     /**
@@ -88,7 +88,7 @@ class DressesController extends AppController
             $options = array('conditions' => array('Dress.' . $this->Dress->primaryKey => $id));
             $this->request->data = $this->Dress->find('first', $options);
         }
-        $mesurements = $this->Dress->Mesurement->find('list');
+		$mesurements = $this->Dress->Mesurement->find('list',['fields'=>['id','type']]);
         $this->set(compact('mesurements'));
     }
 
