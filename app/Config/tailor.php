@@ -20,4 +20,10 @@ $tailor['status'] = array(
 	3 => 'Stich Done',
 	4 => 'Complete'
 );
+$tailor['status_color'] = array(
+	1 => 'Order Received',
+	2 => 'Tailor Assigned',
+	3 => 'Stich Done',
+	4 => 'Complete'
+);
 $config['tailor'] = $tailor;

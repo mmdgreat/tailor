@@ -24,23 +24,28 @@
                         <tbody>
                         <?php foreach ($orders as $order): ?>
 							<tr>
-								<td>
-									<?php echo $this->Html->link($order['Customer']['name'], array('controller' => 'customers', 'action' => 'view', $order['Customer']['id'])); ?>
-								</td>
-								<td>
-									<?php echo $this->Html->link($order['Dress']['type'], array('controller' => 'dresses', 'action' => 'view', $order['Dress']['id'])); ?>
-								</td>
-								<td><?php echo h(date('d-M-y',strtotime($order['Order']['order_date']))); ?>&nbsp;</td>
-								<td><?php echo h(date('d-M-y',strtotime($order['Order']['delivery_date']))); ?>&nbsp;</td>
-								<td><?php echo h($status[$order['Order']['status']]); ?>&nbsp;</td>
-								<td>
-									<?php echo $this->Form->create('Order',['class'=>'form-inline']); ?>
-									<?php echo $this->Form->input('id', ['type'=>'hidden','value'=>$order['Order']['id']]); ?>
-									<?php echo $this->Form->input('user_id', ['empty'=>'--Select--','options'=>$users,'div' => false, 'label' => false, 'class' => 'form-control']); ?>
-									<?php echo $this->Form->input('tailor_price', ['div' => false, 'label' => false, 'class' => 'form-control','style'=>'max-width:140px;']); ?>
-									<?php echo $this->Form->button(__('Update'), ['class' => 'btn btn-default']) ?>
-									<?php echo $this->Form->end(); ?>
-								</td>
+								<?php echo $this->Form->create('Order',['class'=>'form-inline']); ?>
+                                <td>
+                                    <?php echo $this->Html->link($order['Customer']['name'], array('controller' => 'customers', 'action' => 'view', $order['Customer']['id'])); ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->Html->link($order['Dress']['type'], array('controller' => 'dresses', 'action' => 'view', $order['Dress']['id'])); ?>
+                                </td>
+                                <td><?php echo h(date('d-M-y',strtotime($order['Order']['order_date']))); ?>&nbsp;</td>
+                                <td><?php echo h(date('d-M-y',strtotime($order['Order']['delivery_date']))); ?>&nbsp;</td>
+                                    <td><?php echo h($status[$order['Order']['status']]); ?>&nbsp; 
+                                </td>
+                                <td>
+                                    <?php echo $this->Form->input('id', ['type'=>'hidden','value'=>$order['Order']['id']]); ?>
+                                    <?php echo $this->Form->input('user_id', ['empty'=>'--Select--','options'=>$users, 'selected'=>$order['User']['id'], 'div' => false, 'label' => false, 'class' => 'form-control']); ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->Form->input('tailor_price', ['value' =>$order['Order']['tailor_price'], 'div' => false, 'label' => false, 'class' => 'form-control','style'=>'max-width:140px;']); ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->Form->button(__('Update'), ['class' => 'btn btn-success']) ?>          
+                                </td>
+                            <?php echo $this->Form->end(); ?>
 							</tr>
                         <?php endforeach; ?>
                         </tbody>
