@@ -1,38 +1,47 @@
 <?php
 App::uses('AppController', 'Controller');
+
 /**
  * Users Controller
  *
  * @property User $User
  * @property PaginatorComponent $Paginator
  */
-class UsersController extends AppController {
+class UsersController extends AppController
+{
 
-/**
- * Components
- *
- * @var array
- */
+	/**
+	 * Components
+	 *
+	 * @var array
+	 */
 	public $components = array('Paginator');
 
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
+	/**
+	 * index method
+	 *
+	 * @return void
+	 */
+	public function index()
+	{
 		$this->User->recursive = 0;
-		$this->set('users', $this->Paginator->paginate());
+
+		Configure::load('tailor');
+		$roles = Configure::read('tailor.roles');
+
+		$users = $this->Paginator->paginate();
+		$this->set(compact('users','roles'));
 	}
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
+	/**
+	 * view method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
+	public function view($id = null)
+	{
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
@@ -40,12 +49,13 @@ class UsersController extends AppController {
 		$this->set('user', $this->User->find('first', $options));
 	}
 
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
+	/**
+	 * add method
+	 *
+	 * @return void
+	 */
+	public function add()
+	{
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
@@ -57,14 +67,15 @@ class UsersController extends AppController {
 		}
 	}
 
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function edit($id = null) {
+	/**
+	 * edit method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
+	public function edit($id = null)
+	{
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
@@ -81,14 +92,15 @@ class UsersController extends AppController {
 		}
 	}
 
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
+	/**
+	 * delete method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
+	public function delete($id = null)
+	{
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));

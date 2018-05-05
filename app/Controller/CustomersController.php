@@ -1,38 +1,42 @@
 <?php
 App::uses('AppController', 'Controller');
+
 /**
  * Customers Controller
  *
  * @property Customer $Customer
  * @property PaginatorComponent $Paginator
  */
-class CustomersController extends AppController {
+class CustomersController extends AppController
+{
 
-/**
- * Components
- *
- * @var array
- */
+	/**
+	 * Components
+	 *
+	 * @var array
+	 */
 	public $components = array('Paginator');
 
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
+	/**
+	 * index method
+	 *
+	 * @return void
+	 */
+	public function index()
+	{
 		$this->Customer->recursive = 0;
 		$this->set('customers', $this->Paginator->paginate());
 	}
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
+	/**
+	 * view method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
+	public function view($id = null)
+	{
 		if (!$this->Customer->exists($id)) {
 			throw new NotFoundException(__('Invalid customer'));
 		}
@@ -40,31 +44,40 @@ class CustomersController extends AppController {
 		$this->set('customer', $this->Customer->find('first', $options));
 	}
 
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
+	/**
+	 * add method
+	 *
+	 * @return void
+	 */
+	public function add()
+	{
 		if ($this->request->is('post')) {
 			$this->Customer->create();
 			if ($this->Customer->save($this->request->data)) {
 				$this->Flash->success(__('The customer has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Flash->error(__('The customer could not be saved. Please, try again.'));
 			}
+			if(isset($this->request->data['Customer']['redirect'])) {
+				$url = explode('_',$this->request->data['Customer']['redirect']);
+				return $this->redirect(array('controller'=>$url[0],'action' => $url[1]));
+			}
+			else {
+				return $this->redirect(array('action' => 'index'));
+			}
+		}
+		else{
+			$this->Flash->error(__('The customer could not be saved. Please, try again.'));
 		}
 	}
 
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function edit($id = null) {
+	/**
+	 * edit method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
+	public function edit($id = null)
+	{
 		if (!$this->Customer->exists($id)) {
 			throw new NotFoundException(__('Invalid customer'));
 		}
@@ -81,14 +94,15 @@ class CustomersController extends AppController {
 		}
 	}
 
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
+	/**
+	 * delete method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
+	public function delete($id = null)
+	{
 		$this->Customer->id = $id;
 		if (!$this->Customer->exists()) {
 			throw new NotFoundException(__('Invalid customer'));
