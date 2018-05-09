@@ -5,7 +5,7 @@
 			<div class="form-body" id="newDress">
 				<div class="row">
 					<div class="col-md-12">
-						<h4 class="m-b-0">New Dress Type</h4>
+						<h4 class="m-b-0">Add New Dress Type</h4>
 					</div>
 				</div>
 				<hr class="m-t-0 m-b-40">
@@ -41,7 +41,7 @@
 						<div class="col-md-6">
 							<div class="row">
 								<div class="col-md-offset-3 col-md-9">
-									<?php echo $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
+									<?php echo $this->Form->button(__('Add'), ['class' => 'btn btn-primary']) ?>
 								</div>
 							</div>
 						</div>
@@ -51,18 +51,5 @@
 				<?php echo $this->Form->end() ?>
 			</div>
 		</div>
-		<?php echo $this->Form->end() ?>
-		<div class="actions">
-			<h3><?php echo __('Actions'); ?></h3>
-			<ul>
-
-				<li><?php echo $this->Html->link(__('List Dresses'), array('action' => 'index')); ?></li>
-				<li><?php echo $this->Html->link(__('List Orders'), array('controller' => 'orders', 'action' => 'index')); ?> </li>
-				<li><?php echo $this->Html->link(__('New Order'), array('controller' => 'orders', 'action' => 'add')); ?> </li>
-				<li><?php echo $this->Html->link(__('List Mesurements'), array('controller' => 'mesurements', 'action' => 'index')); ?> </li>
-				<li><?php echo $this->Html->link(__('New Mesurement'), array('controller' => 'mesurements', 'action' => 'add')); ?> </li>
-			</ul>
-		</div>
 	</div>
-</div>
 </div>

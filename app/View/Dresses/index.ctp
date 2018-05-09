@@ -6,7 +6,7 @@
                     <h4>Dresses</h4>
                 </div>
                 <div class="action-links col-lg-9">
-                    <?php echo $this->Html->link(__('New Dress'), array('action' => 'add'), ['class' => 'btn btn-default m-b-10']); ?>
+                    <?php echo $this->Html->link(__('New Dress'), array('action' => 'add'), ['class' => 'btn btn-dark m-b-10']); ?>
                 </div>
             </div>
             <div class="card-body">
@@ -27,8 +27,7 @@
                                 <td><?php echo h($dress['Dress']['type']); ?>&nbsp;</td>
                                 <td><?php echo h($dress['Dress']['default_price']); ?>&nbsp;</td>
                                 <td class="actions">
-                                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $dress['Dress']['id']), ['class' => 'btn btn-primary m-b-10']); ?>
-                                    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $dress['Dress']['id']), ['class' => 'btn btn-warning m-b-10']); ?>
+                                    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $dress['Dress']['id']), ['class' => 'btn btn-secondary m-b-10']); ?>
                                     <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $dress['Dress']['id']), ['class' => 'btn btn-danger m-b-10'], array('confirm' => __('Are you sure you want to delete # %s?', $dress['Dress']['id']))); ?>
                                 </td>
                             </tr>

@@ -26,17 +26,18 @@ class OrdersController extends AppController
     {
         $this->Order->recursive = 0;
         $this->paginate = [
-        	'order' => 'Order.id DESC',
+        	'order' => 'Order.delivery_date ASC',
 			'fields' => ['Order.id','Order.dress_id','Order.order_date','Order.delivery_date','Order.advance_amount','Order.total_cost',
 					'Customer.id','Customer.name','Dress.id','Dress.type','User.id','User.first_name','Order.status'
 				],
 			'limit'=>50
 		];
 
-		Configure::load('tailor');
-		$status = Configure::read('tailor.status');
+        Configure::load('tailor');
+        $status = Configure::read('tailor.status');
+        $status_color = Configure::read('tailor.status_color');
         $orders = $this->Paginator->paginate();
-        $this->set(compact('orders','status'));
+        $this->set(compact('orders','status','status_color'));
     }
 
     /**
@@ -204,7 +205,7 @@ die;
 			'fields' => ['Order.id','Order.dress_id','Order.order_date','Order.delivery_date','Order.advance_amount','Order.total_cost','Order.tailor_price',
 				'Customer.id','Customer.name','Dress.id','Dress.type','User.id','User.first_name','Order.status'
 			],
-			'conditions'=>['Order.status'=>1],
+			'conditions'=>['Order.status'=>array(1,2)],
 			'limit'=>50
 		];
 
@@ -234,6 +235,24 @@ die;
 		$order['Order']['id'] = $id;
 		$order['Order']['outstanding_amt'] = 0;
 		$order['Order']['status'] = 4;
+
+		if ($this->Order->save($order)) {
+			$this->Flash->success(__('Tailor has been assigned.'));
+			return $this->redirect($this->referer());
+		} else {
+			$this->Flash->error(__('Tailor could not be assigned. Please, try again.'));
+			return $this->redirect($this->referer());
+		}
+	}
+        
+        public function stich_done($id=null) {
+		if (!$this->Order->exists($id)) {
+			throw new NotFoundException(__('Invalid order'));
+		}
+
+		$order = [];
+		$order['Order']['id'] = $id;
+		$order['Order']['status'] = 3;
 
 		if ($this->Order->save($order)) {
 			$this->Flash->success(__('Tailor has been assigned.'));

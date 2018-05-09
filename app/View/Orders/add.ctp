@@ -73,7 +73,7 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 		$(".showNewCustomerForm").click(function(){
 			$("#newCustomer").slideToggle();
 			$(this).text(function(i, text){
-				return text === "Show New Customer Form" ? "Hide Customer Form" : "Show New Customer Form";
+				return text === "Add New Customer" ? "Hide" : "Add New Customer";
 			})
 		});
 	});
@@ -110,14 +110,14 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 							</div>
 							<div class="col-md-3">
 								<div class="form-group row">
-									<label>ADDRESS</label>
+									<label>POASTAL ADDRESS</label>
 									<?php echo $this->Form->input('address', ['class' => 'form-control', 'div' => false, 'label' => false]); ?>
 									<?php echo $this->Form->input('redirect', ['type' => 'hidden', 'value' => 'orders_add']); ?>
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="form-group row">
-									<?php echo $this->Form->button(__('Submit'), ['class' => 'btn btn-primary','div'=>false]); ?>
+									<?php echo $this->Form->button(__('Add'), ['class' => 'btn btn-primary','div'=>false]); ?>
 								</div>
 							</div>
 							<?php echo $this->Form->end(); ?>
@@ -132,8 +132,8 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 						<h4 class="m-b-0">Create Order</h4>
 					</div>
 					<div class="col-md-9" style="text-align:right;">
-						<?php echo $this->Html->link(__('Show New Customer Form'),'#' ,['class' => 'btn btn-success showNewCustomerForm']) ?>
-						<?php echo $this->Html->link(__('View All Orders'), ['action' => 'index'], ['class' => 'btn btn-success']) ?>
+						<?php echo $this->Html->link(__('Add New Customer'),'#' ,['class' => 'btn btn-dark showNewCustomerForm']) ?>
+						<?php echo $this->Html->link(__('View All Orders'), ['action' => 'index'], ['class' => 'btn btn-dark']) ?>
 					</div>
 				</div>
 
@@ -249,26 +249,7 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 							</div>
 						</div>
 					</div>
-
-					<div class="col-md-6">
-						<div class="form-group row">
-							<label class="control-label text-right col-md-3">Tailor Date</label>
-							<div class="col-md-9">
-								<?php echo $this->Form->control('tailor_date', ['empty' => true, 'div' => false, 'label' => false, 'class' => 'form-control custom-textarea datepicker', 'type' => 'text', 'default' => date('d-m-Y', strtotime('+2 days'))]); ?>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6">
-						<div class="form-group row">
-							<label
-								class="control-label text-right col-md-3">Tailor</label>
-							<div class="col-md-9">
-								<?php echo $this->Form->control('user_id', ['div' => false, 'label' => false, 'class' => 'form-control']); ?>
-							</div>
-						</div>
-					</div>
-
+                                        
 					<div class="col-md-6">
 						<div class="form-group row">
 							<label class="control-label text-right col-md-3">Advance Amount</label>
@@ -294,7 +275,7 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 					<div class="col-md-6">
 						<div class="row">
 							<div class="col-md-offset-3 col-md-9">
-								<?php echo $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
+								<?php echo $this->Form->button(__('Create'), ['class' => 'btn btn-primary']) ?>
 							</div>
 						</div>
 					</div>
@@ -304,5 +285,4 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 		</div>
 		<?php echo $this->Form->end() ?>
 	</div>
-</div>
 </div>

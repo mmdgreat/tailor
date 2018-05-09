@@ -43,7 +43,7 @@
                                     <?php echo $this->Form->input('tailor_price', ['value' =>$order['Order']['tailor_price'], 'div' => false, 'label' => false, 'class' => 'form-control','style'=>'max-width:140px;']); ?>
                                 </td>
                                 <td>
-                                    <?php echo $this->Form->button(__('Update'), ['class' => 'btn btn-success']) ?>          
+                                    <?php echo $this->Form->button(__('Update'), ['class' => 'btn btn-primary']) ?>          
                                 </td>
                             <?php echo $this->Form->end(); ?>
 							</tr>
