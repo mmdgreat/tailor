@@ -3,8 +3,44 @@ $url = Router::url(['controller' => 'orders', 'action' => 'get_customers'], true
 $custUrl = Router::url(['controller' => 'orders', 'action' => 'get_customer'], true);
 $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'], true);
 ?>
+<style>
+    #alter-bg {
+            background-color: #24c54724;
+    }
+    #bls-bg {
+            background-color: #de757f42;
+    }
+    #dress-bg {
+            background-color: #d8a6292e;
+    }
+</style>
 <script>
 	$(document).ready(function () {
+                //OrderDressId
+                $('#OrderDressId > option').each(function() {
+                        if($(this).val() == 1) {
+                               $(this).addClass('badge-success'); 
+                        } else if($(this).val() == 2) {
+                               $(this).addClass('badge-danger'); 
+                        } else if($(this).val() == 3) {
+                               $(this).addClass('badge-warning');  //#d8a6292e
+                        }
+//                        alert($(this).text() + ' ' + $(this).val());
+                });
+                
+                $('#OrderDressId').on('change', function(){
+                        getcolor = $('#OrderDressId option:selected').val();
+                        if(getcolor == 1) {
+                               $('.card-outline-info').attr('id','alter-bg');; 
+                        } else if(getcolor == 2) {
+                               $('.card-outline-info').attr('id','bls-bg');
+                        } else if(getcolor == 3) {
+                               $('.card-outline-info').attr('id','dress-bg');  //#d8a6292e
+                        } else {
+                             $('.card-outline-info').removeAttr('id');   
+                        }
+                });
+                    
 		$(".datepicker").datepicker({
 			dateFormat: "dd-mm-yy"
 		});
@@ -194,7 +230,6 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 						</div>
 					</div>
 
-					<div id="mes" class="row" style="width: 100%;"></div>
 
 					<!--div class="col-md-3">
                             <div class="form-group row">
@@ -249,6 +284,17 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 							</div>
 						</div>
 					</div>
+
+					<div class="col-md-6">
+						<div class="form-group row">
+							<label class="control-label text-right col-md-3">Tailor Date</label>
+							<div class="col-md-9">
+								<?php echo $this->Form->control('tailor_date', ['empty' => true, 'div' => false, 'label' => false, 'class' => 'form-control custom-textarea datepicker', 'type' => 'text', 'default' => date('d-m-Y', strtotime('+13 days'))]); ?>
+							</div>
+						</div>
+					</div>
+                                        
+					<div id="mes" class="row" style="width: 100%;"></div>
                                         
 					<div class="col-md-6">
 						<div class="form-group row">

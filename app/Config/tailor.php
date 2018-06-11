@@ -15,15 +15,17 @@ $tailor['is_active'] = array(
 	0 => 'No'
 );
 $tailor['status'] = array(
+        0 => 'Cancelled',
 	1 => 'Order Received',
 	2 => 'Tailor Assigned',
 	3 => 'Stich Done',
 	4 => 'Complete'
 );
 $tailor['status_color'] = array(
-	1 => 'warning',
+        0 => 'light',
+	1 => 'secondary',
 	2 => 'info',
 	3 => 'primary',
-	4 => 'success'
+	4 => 'success',
 );
 $config['tailor'] = $tailor;

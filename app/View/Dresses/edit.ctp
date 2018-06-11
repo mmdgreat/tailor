@@ -4,8 +4,12 @@
 			<?php echo $this->Form->create('Dress', ['class' => 'form-horizontal']); ?>
 			<div class="form-body" id="editDress">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-3">
 						<h4 class="m-b-0">Edit Dress</h4>
+					</div>
+                                        <div class="col-md-9" style="text-align:right;">
+						<?php echo $this->Html->link(__('Add New Dress'),['action' => 'add'], ['class' => 'btn btn-dark']) ?>
+						<?php echo $this->Html->link(__('View All Dresses'), ['action' => 'index'], ['class' => 'btn btn-dark']) ?>
 					</div>
 				</div>
 				<hr class="m-t-0 m-b-40">

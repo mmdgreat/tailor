@@ -12,7 +12,21 @@
                         <li><a href="<?php echo $this->Html->url(array('controller' => 'orders', 'action' => 'add'));?>">Create Order</a></li>
                     </ul>
                 </li>
-
+                <li>
+                    <a href="<?php echo $this->Html->url(array('controller' => 'orders', 'action' => 'assign_tailor'));?>">
+                        <i class="ti-cut"></i> Assign Tailor
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'index'));?>">
+                        <i class="ti-user"></i> Tailors
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo $this->Html->url(array('controller' => 'customers', 'action' => 'index'));?>">
+                        <i class="ti-face-smile"></i> Customers
+                    </a>
+                </li>
                 <li>
                     <a class="sidebar-sub-toggle">
                         <i class="ti-bag"></i> Dresses <span class="sidebar-collapse-icon ti-angle-down"></span></a>
@@ -27,11 +41,7 @@
                         <i class="ti-ruler-alt-2"></i></i> Measurements 
                     </a>
                 </li>
-                <li>
-                    <a href="<?php echo $this->Html->url(array('controller' => 'orders', 'action' => 'assign_tailor'));?>">
-                        <i class="ti-user"></i> Assign Tailor
-                    </a>
-                </li>
+                
             </ul>
         </div>
     </div>

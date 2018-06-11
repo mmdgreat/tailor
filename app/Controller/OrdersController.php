@@ -22,16 +22,30 @@ class OrdersController extends AppController
      *
      * @return void
      */
-    public function index()
+    public function index($custid = 0)
     {
         $this->Order->recursive = 0;
-        $this->paginate = [
-        	'order' => 'Order.delivery_date ASC',
+        
+        if($custid > 0) {
+                $this->paginate = [
+                        'conditions' => [
+                                'Order.customer_id' => $custid,
+                            ],
+                        'order' => 'Order.delivery_date ASC',
 			'fields' => ['Order.id','Order.dress_id','Order.order_date','Order.delivery_date','Order.advance_amount','Order.total_cost',
 					'Customer.id','Customer.name','Dress.id','Dress.type','User.id','User.first_name','Order.status'
 				],
 			'limit'=>50
 		];
+        } else {
+                $this->paginate = [
+                        'order' => 'Order.delivery_date ASC',
+			'fields' => ['Order.id','Order.dress_id','Order.order_date','Order.delivery_date','Order.advance_amount','Order.total_cost',
+					'Customer.id','Customer.name','Dress.id','Dress.type','User.id','User.first_name','Order.status'
+				],
+			'limit'=>50
+		];
+        }
 
         Configure::load('tailor');
         $status = Configure::read('tailor.status');
@@ -40,6 +54,38 @@ class OrdersController extends AppController
         $this->set(compact('orders','status','status_color'));
     }
 
+    
+    public function tailor_index($id = null) {
+        $this->Order->recursive = 0;
+        
+        if($custid > 0) {
+                $this->paginate = [
+                        'conditions' => [
+                                array('Order.user_id' => $id, 'Order.status' => 2),
+                            ],
+                        'order' => 'Order.delivery_date ASC',
+			'fields' => ['Order.id','Order.dress_id','Order.order_date','Order.delivery_date','Order.advance_amount','Order.total_cost',
+					'Customer.id','Customer.name','Dress.id','Dress.type','User.id','User.first_name','Order.status'
+				],
+			'limit'=>50
+		];
+        } else {
+                $this->paginate = [
+                        'order' => 'Order.delivery_date ASC',
+			'fields' => ['Order.id','Order.dress_id','Order.order_date','Order.delivery_date','Order.advance_amount','Order.total_cost',
+					'Customer.id','Customer.name','Dress.id','Dress.type','User.id','User.first_name','Order.status'
+				],
+			'limit'=>50
+		];
+        }
+
+        Configure::load('tailor');
+        $status = Configure::read('tailor.status');
+        $status_color = Configure::read('tailor.status_color');
+        $orders = $this->Paginator->paginate();
+        $this->set(compact('orders','status','status_color'));
+    }
+    
     /**
      * view method
      *
@@ -68,13 +114,13 @@ class OrdersController extends AppController
             $this->request->data['Order']['order_date'] = date('Y-m-d H:i:s', strtotime($this->request->data['Order']['order_date']));
 			$this->request->data['Order']['delivery_date'] = date('Y-m-d H:i:s', strtotime($this->request->data['Order']['delivery_date']));
 			$this->request->data['Order']['tailor_date'] = date('Y-m-d H:i:s', strtotime($this->request->data['Order']['tailor_date']));
-			$this->request->data['Order']['tailor_assigned'] = date('Y-m-d H:i:s', strtotime($this->request->data['Order']['tailor_assigned']));
+			//$this->request->data['Order']['tailor_assigned'] = date('Y-m-d H:i:s', strtotime($this->request->data['Order']['tailor_assigned']));
 			$this->request->data['Order']['outstanding_amt'] = $this->request->data['Order']['total_cost'] - $this->request->data['Order']['advance_amount'];
 
             //debug($this->request->data);
 			$this->Order->create();
             if ($this->Order->save($this->request->data)) {
-            	debug('in');
+            	//debug('in');
                 $this->Flash->success(__('The order has been saved.'));
                 return $this->redirect(array('action' => 'index'));
             } else {

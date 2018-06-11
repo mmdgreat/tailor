@@ -111,7 +111,7 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 				<div class="row">
 					<div class="col-md-6">
 						<div class="row">
-							<div class="col-md-offset-3 col-md-9">
+							<div class="col-md-offset-3 col-md-2">
 								<?php echo $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
 							</div>
 						</div>

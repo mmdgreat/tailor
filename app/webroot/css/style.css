@@ -229,6 +229,9 @@ span.badge {
     font-size: 14px;
 }
 
+.badge-light {
+    color: #111;
+}
 .vtabs {
     display: table;
 }
