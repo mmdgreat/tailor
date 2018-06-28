@@ -211,7 +211,18 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 							</div>
 						</div>
 					</div>
-
+                                    
+                                        <div class="col-md-6">
+						<div class="form-group row">
+							<label class="control-label text-right col-md-3">Receipt No.</label>
+							<div class="col-md-9">
+								<?php echo $this->Form->input('receipt_no', ['div' => false, 'label' => false, 'class' => 'form-control']); ?>
+							</div>
+						</div>
+					</div>
+                                    
+                                        <div id="" class="row" style="width: 100%;"></div>       
+                                    
 					<div class="col-md-6">
 						<div class="form-group row">
 							<label class="control-label text-right col-md-3">Dress Type</label>
@@ -220,6 +231,8 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 							</div>
 						</div>
 					</div>
+                                        
+					<div id="mes" class="row" style="width: 100%;"></div>
 
 					<div class="col-md-6">
 						<div class="form-group row">
@@ -275,7 +288,7 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 							</div>
 						</div>
 					</div>
-
+                                        
 					<div class="col-md-6">
 						<div class="form-group row">
 							<label class="control-label text-right col-md-3">Delivery Date</label>
@@ -293,8 +306,6 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 							</div>
 						</div>
 					</div>
-                                        
-					<div id="mes" class="row" style="width: 100%;"></div>
                                         
 					<div class="col-md-6">
 						<div class="form-group row">

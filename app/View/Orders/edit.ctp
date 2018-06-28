@@ -56,7 +56,7 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 						</div>
 					</div>
 
-					<div id="mes" class="row" style="width: 100%;"></div>
+					<div class="col-md-6"></div>
 
 					<div class="col-md-6">
 						<div class="form-group row">
@@ -85,7 +85,7 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
 						</div>
 					</div>
 
-					<div id="mes" class="row" style="width: 100%;"></div>
+					<div class="col-md-6"></div>
                                         
 					<div class="col-md-6">
 						<div class="form-group row">

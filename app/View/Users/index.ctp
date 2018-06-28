@@ -31,7 +31,7 @@
                                 <td><?php echo h($user['User']['email']); ?>&nbsp;</td>
                                 <td><?php echo h($roles[$user['User']['role']]); ?>&nbsp;</td>
                                 <td>
-                                        <?php echo $this->Html->link(__('View Orders'), array('controller' => 'orders', 'action' => 'tailor_index', $user['User']['id']), ['class' => 'btn btn-secondary m-b-10']); ?>
+                                        <?php echo $this->Html->link(__('View Orders'), array('controller' => 'orders', 'action' => 'tailor_order', $user['User']['id']), ['class' => 'btn btn-secondary m-b-10']); ?>
                                         <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']),['class'=>'btn btn-danger m-b-10'] ,array('confirm' => __('Are you sure you want to delete # %s?', $user['User']['id']))); ?>
                                 </td>
                             </tr>

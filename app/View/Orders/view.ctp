@@ -19,54 +19,61 @@
                         <?php echo $this->Html->link($order['Customer']['name'], array('controller' => 'customers', 'action' => 'view', $order['Customer']['id'])); ?>
                             </div>
                         </div>
+                        <hr>
                         <div class="card-body row">
                             <h6  class="col-sm-2 col-form-label"><?php echo __('Dress'); ?></h6>
                             <div class="col-sm-10">
-                        <?php echo h($order['Dress']['type']); ?>
+                                <?php echo h($order['Dress']['type']); ?>
                             </div>
                         </div> 
+                        <hr>
                         <div class="card-body row">
                             <h6  class="col-sm-2 col-form-label"><?php echo __('Remarks'); ?></h6>
                             <div class="col-sm-10">
-                        <?php echo h($order['Order']['remarks']); ?>
+                                <?php echo h($order['Order']['remarks']); ?>
                             </div>
                         </div>
-
+                        <hr>
                         <div class="card-body row">
                             <h6  class="col-sm-2 col-form-label"><?php echo __('Order Date'); ?></h6>
                             <div class="col-sm-10">
-                       <?php echo h(date("d-m-Y", strtotime($order['Order']['order_date']))); ?>
+                                <?php echo h(date("d-m-Y", strtotime($order['Order']['order_date']))); ?>
                             </div>
                         </div>
-
+                        <hr>
                         <div class="card-body row">
                             <h6  class="col-sm-2 col-form-label"><?php echo __('Delivery Date'); ?></h6>
                             <div class="col-sm-10">
-                        <?php echo h(date("d-m-Y", strtotime($order['Order']['delivery_date']))); ?>
+                                <?php echo h(date("d-m-Y", strtotime($order['Order']['delivery_date']))); ?>
                             </div>
                         </div>
-
+                        <hr>
                         <div class="card-body row">
                             <h6  class="col-sm-2 col-form-label"><?php echo __('Advance Amount'); ?></h6>
                             <div class="col-sm-10">
-                        <?php echo h($order['Order']['advance_amount']); ?>
+                                <?php echo h($order['Order']['advance_amount']); ?>
                             </div>
                         </div>
-
+                        <hr>
                         <div class="card-body row">
                             <h6  class="col-sm-2 col-form-label"><?php echo __('Total Amount'); ?></h6>
                             <div class="col-sm-10">
-                        <?php echo h($order['Order']['total_cost']); ?>
+                                <?php echo h($order['Order']['total_cost']); ?>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="card-body row">
+                            <h6  class="col-sm-2 col-form-label"><?php echo __('Mesurements'); ?></h6>
+                            <div class="col-sm-10">
+                                <div class="row">
+                                    <?php foreach ($mesurements as $key => $value) { ?>
+                                    <p class="col-sm-2"><b><?=$key?></b> : <?=$value?></p>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <dt><?php echo __('Mesurements'); ?></dt>
-                    <dd>
-			<?php echo h($order['Order']['mesurements']); ?>
-                        &nbsp;
-                    </dd>
-                    </dl>
                 </div>
             </div>
         </div>

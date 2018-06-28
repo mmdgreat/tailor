@@ -29,7 +29,7 @@
                                 <td><?php echo h($customer['Customer']['email']); ?>&nbsp;</td>
                                 <td><?php echo h($customer['Customer']['address']); ?>&nbsp;</td>
                                 <td class="actions">
-			<?php echo $this->Html->link(__('View Orders'), array('controller' => 'orders', 'action' => 'index', $customer['Customer']['id']), ['class' => 'btn btn-secondary m-b-10']); ?>
+			<?php echo $this->Html->link(__('View Orders'), array('controller' => 'orders', 'action' => 'index', $customer['Customer']['id'],), ['class' => 'btn btn-secondary m-b-10']); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $customer['Customer']['id']), ['class' => 'btn btn-secondary m-b-10']); ?>
 			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $customer['Customer']['id']), ['class' => 'btn btn-danger m-b-10'], array('confirm' => __('Are you sure you want to delete # %s?', $customer['Customer']['id']))); ?>
                                 </td>

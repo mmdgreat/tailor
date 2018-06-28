@@ -16,6 +16,7 @@
                         <thead>
                         <tr>
                             <th><?php echo $this->Paginator->sort('id','Order No.'); ?></th>
+                            <th><?php echo $this->Paginator->sort('receipt_no'); ?></th>
                             <th><?php echo $this->Paginator->sort('dress_id'); ?></th>
                             <th><?php echo $this->Paginator->sort('customer_id','Customer'); ?></th>
                             <th><?php echo $this->Paginator->sort('order_date'); ?></th>
@@ -33,6 +34,9 @@
                             <tr>
                                 <td>
                                     <?php echo $this->Html->link($order['Order']['id'], array('controller' => 'customers', 'action' => 'view', $order['Customer']['id'])); ?>
+                                </td>
+                                <td>
+                                    <?php echo h($order['Order']['receipt_no']); ?>
                                 </td>
                                 <td>
                                     <span class="badge badge-<?=$status_color[$order['Dress']['id']];?>">

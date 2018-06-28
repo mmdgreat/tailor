@@ -32,7 +32,7 @@ class OrdersController extends AppController
                                 'Order.customer_id' => $custid,
                             ],
                         'order' => 'Order.delivery_date ASC',
-			'fields' => ['Order.id','Order.dress_id','Order.order_date','Order.delivery_date','Order.advance_amount','Order.total_cost',
+			'fields' => ['Order.id','Order.dress_id','Order.receipt_no','Order.order_date','Order.tailor_date','Order.delivery_date','Order.advance_amount','Order.total_cost',
 					'Customer.id','Customer.name','Dress.id','Dress.type','User.id','User.first_name','Order.status'
 				],
 			'limit'=>50
@@ -40,7 +40,7 @@ class OrdersController extends AppController
         } else {
                 $this->paginate = [
                         'order' => 'Order.delivery_date ASC',
-			'fields' => ['Order.id','Order.dress_id','Order.order_date','Order.delivery_date','Order.advance_amount','Order.total_cost',
+			'fields' => ['Order.id','Order.dress_id','Order.receipt_no','Order.order_date','Order.tailor_date','Order.delivery_date','Order.advance_amount','Order.total_cost',
 					'Customer.id','Customer.name','Dress.id','Dress.type','User.id','User.first_name','Order.status'
 				],
 			'limit'=>50
@@ -53,31 +53,22 @@ class OrdersController extends AppController
         $orders = $this->Paginator->paginate();
         $this->set(compact('orders','status','status_color'));
     }
-
     
-    public function tailor_index($id = null) {
+    
+    public function tailor_order($id = 0)
+    {
         $this->Order->recursive = 0;
         
-        if($custid > 0) {
-                $this->paginate = [
-                        'conditions' => [
-                                array('Order.user_id' => $id, 'Order.status' => 2),
-                            ],
-                        'order' => 'Order.delivery_date ASC',
-			'fields' => ['Order.id','Order.dress_id','Order.order_date','Order.delivery_date','Order.advance_amount','Order.total_cost',
-					'Customer.id','Customer.name','Dress.id','Dress.type','User.id','User.first_name','Order.status'
-				],
-			'limit'=>50
-		];
-        } else {
-                $this->paginate = [
-                        'order' => 'Order.delivery_date ASC',
-			'fields' => ['Order.id','Order.dress_id','Order.order_date','Order.delivery_date','Order.advance_amount','Order.total_cost',
-					'Customer.id','Customer.name','Dress.id','Dress.type','User.id','User.first_name','Order.status'
-				],
-			'limit'=>50
-		];
-        }
+        $this->paginate = [
+                'conditions' => [
+                        array('Order.user_id' => $id, 'Order.status >= ' => 2),
+                    ],
+                'order' => 'Order.tailor_date ASC',
+                'fields' => ['Order.id','Order.dress_id','Order.receipt_no','Order.order_date','Order.tailor_date','Order.delivery_date','Order.advance_amount','Order.total_cost',
+                                'Customer.id','Customer.name','Dress.id','Dress.type','User.id','User.first_name','Order.status'
+                        ],
+                'limit'=>50
+        ];
 
         Configure::load('tailor');
         $status = Configure::read('tailor.status');
@@ -85,7 +76,7 @@ class OrdersController extends AppController
         $orders = $this->Paginator->paginate();
         $this->set(compact('orders','status','status_color'));
     }
-    
+
     /**
      * view method
      *
@@ -99,7 +90,9 @@ class OrdersController extends AppController
             throw new NotFoundException(__('Invalid order'));
         }
         $options = array('conditions' => array('Order.' . $this->Order->primaryKey => $id));
-        $this->set('order', $this->Order->find('first', $options));
+        $order = $this->Order->find('first', $options);
+        $mesurements = json_decode($order['Order']['mesurements'],true);
+        $this->set(compact('order', 'mesurements'));
     }
 
     /**
@@ -261,6 +254,19 @@ die;
 		$users = $this->Order->User->find('list',['fields'=>['id','full_name'],'conditions'=>['role'=>2]]);
 		$this->set(compact('orders','status','users'));
 	}
+        
+        public function tailor_receipt($id = null) {
+                if (!$this->Order->exists($id)) {
+			throw new NotFoundException(__('Invalid order'));
+		}
+		$options = array('conditions' => array('Order.' . $this->Order->primaryKey => $id));
+		$order = $this->Order->find('first', $options);
+                $mesurements = json_decode($order['Order']['mesurements'],true);
+//                debug($mesurements); die;
+                Configure::load('tailor');
+                $status_color = Configure::read('tailor.status_color');
+		$this->set(compact('order','status_color','mesurements'));
+        }
 
 	public function invoice($id = null)
 	{
