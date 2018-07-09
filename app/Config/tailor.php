@@ -1,4 +1,4 @@
-<?php
+	<?php
 /**
  * Created by IntelliJ IDEA.
  * User: mrunal
@@ -27,5 +27,12 @@ $tailor['status_color'] = array(
 	2 => 'info',
 	3 => 'primary',
 	4 => 'success',
+);
+$tailor['dress_color'] = array(
+    0 => 'info',
+	1 => 'success',
+	2 => 'danger',
+	3 => 'warning',
+	4 => 'primary',
 );
 $config['tailor'] = $tailor;

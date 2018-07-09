@@ -33,7 +33,7 @@
                                 <td><?php echo h($order['Order']['receipt_no']); ?>&nbsp;</td>
                                 <td><?php echo h($order['Customer']['name']); ?></td>
                                 <td>
-                                    <span class="badge badge-<?=$status_color[$order['Dress']['id']];?>">
+                                    <span class="badge badge-<?=$dress_color[$order['Dress']['id']];?>">
                                         <?php echo h($order['Dress']['type']); ?>
                                     </span>
                                 </td>

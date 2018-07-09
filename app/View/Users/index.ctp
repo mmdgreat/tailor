@@ -3,7 +3,7 @@
         <div class="card">
             <div class="row">
                 <div class="card-title col-lg-3">
-                    <h2>Orders</h2>
+                    <h2>Tailors</h2>
                 </div>
                 <div class="action-links col-lg-9">
 					<?php echo $this->Html->link(__('Order List'), array('controller' => 'orders', 'action' => 'index'), ['class' => 'btn btn-dark m-b-10']); ?>

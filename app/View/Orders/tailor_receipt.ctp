@@ -2,10 +2,10 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="row">
-                <div class="card-title col-lg-3">
-                    <h2>Orders</h2>
+                <div class="card-title col-lg-5">
+                    <h2>Order #<?=$order['Order']['id']?> - <?=$order['Order']['receipt_no']?></h2>
                 </div>
-                <div class="action-links col-lg-9">
+                <div class="action-links col-lg-7">
                     <?php echo $this->Html->link(__('Back'), $this->request->referer(), ['class' => 'btn btn-dark m-b-10']); ?>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                                 </td>
                                 <td><?php echo h($order['Order']['receipt_no']); ?>&nbsp;</td>
                                 <td>
-                                    <span class="badge badge-<?=$status_color[$order['Dress']['id']];?>">
+                                    <span class="badge badge-<?=$dress_color[$order['Dress']['id']];?>">
                                         <?php echo h($order['Dress']['type']); ?>
                                     </span>
                                 </td>

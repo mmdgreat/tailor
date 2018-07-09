@@ -11,7 +11,7 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
             background-color: #de757f42;
     }
     #dress-bg {
-            background-color: #d8a6292e;
+            background-color: #eaae1663;
     }
 </style>
 <script>
@@ -23,7 +23,7 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
                         } else if($(this).val() == 2) {
                                $(this).addClass('badge-danger'); 
                         } else if($(this).val() == 3) {
-                               $(this).addClass('badge-warning');  //#d8a6292e
+                               $(this).addClass('badge-warning');  //#eaae1663
                         }
 //                        alert($(this).text() + ' ' + $(this).val());
                 });
@@ -35,7 +35,7 @@ $getDressUrl = Router::url(['controller' => 'dresses', 'action' => 'get_dress'],
                         } else if(getcolor == 2) {
                                $('.card-outline-info').attr('id','bls-bg');
                         } else if(getcolor == 3) {
-                               $('.card-outline-info').attr('id','dress-bg');  //#d8a6292e
+                               $('.card-outline-info').attr('id','dress-bg');  //#eaae1663
                         } else {
                              $('.card-outline-info').removeAttr('id');   
                         }

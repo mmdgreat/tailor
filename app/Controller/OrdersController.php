@@ -50,8 +50,9 @@ class OrdersController extends AppController
         Configure::load('tailor');
         $status = Configure::read('tailor.status');
         $status_color = Configure::read('tailor.status_color');
+        $dress_color = Configure::read('tailor.dress_color');
         $orders = $this->Paginator->paginate();
-        $this->set(compact('orders','status','status_color'));
+        $this->set(compact('orders','status','status_color','dress_color'));
     }
     
     
@@ -72,9 +73,9 @@ class OrdersController extends AppController
 
         Configure::load('tailor');
         $status = Configure::read('tailor.status');
-        $status_color = Configure::read('tailor.status_color');
+        $dress_color = Configure::read('tailor.dress_color');
         $orders = $this->Paginator->paginate();
-        $this->set(compact('orders','status','status_color'));
+        $this->set(compact('orders','status','dress_color'));
     }
 
     /**
@@ -264,8 +265,8 @@ die;
                 $mesurements = json_decode($order['Order']['mesurements'],true);
 //                debug($mesurements); die;
                 Configure::load('tailor');
-                $status_color = Configure::read('tailor.status_color');
-		$this->set(compact('order','status_color','mesurements'));
+            $dress_color = Configure::read('tailor.dress_color');
+		  $this->set(compact('order','dress_color','mesurements'));
         }
 
 	public function invoice($id = null)
